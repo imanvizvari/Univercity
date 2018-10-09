@@ -1,0 +1,78 @@
+//--ConstructorDestructorDemo
+
+//Program.Cs
+
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+namespace ConstructorDestructorDemo
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //Parent p = new Parent("John", "Doe");
+            Child c = new Child("Ross", "Geller");
+
+            Console.ReadKey();
+        }
+    }
+}
+//----------------------------
+
+//Child.Cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConstructorDestructorDemo
+{
+    class Child:Parent
+    {
+        //public Child()
+        //    :base("David","Doe")
+        public Child(string _name, string _family)
+            : base(_name, _family)
+        {
+            Console.WriteLine("Child Instanciated");
+        }
+    }
+}
+//-----------------------
+
+//Parent.Cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConstructorDestructorDemo
+{
+    class Parent
+    {
+        public Parent(string _name, string _family)
+        {
+            Name = _name;
+            Family = _family;
+            Console.WriteLine("Parent Instanciated!");
+        }
+
+        public string Name { get; set; }
+        public string Family { get; set; }
+
+        ~Parent()
+        {
+
+        }
+    }
+}

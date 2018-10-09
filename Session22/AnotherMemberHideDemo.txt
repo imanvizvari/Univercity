@@ -1,0 +1,64 @@
+//--AnotherMemberHideDemo
+
+//Program.Cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AnotherMemberHideDemo
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Child c = new Child();
+
+            c.WriteText();
+
+            Console.ReadKey();
+        }
+    }
+}
+//------------------
+
+//Parent.Cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AnotherMemberHideDemo
+{
+    class Parent
+    {
+        public void WriteText()
+        {
+            Console.WriteLine("From Parent!");
+        }
+    }
+}
+//-------------------
+
+//Child.Cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AnotherMemberHideDemo
+{
+    class Child:Parent
+    {
+        public new void WriteText()
+        {
+            Console.WriteLine("From Child!");
+        }
+    }
+}

@@ -1,0 +1,186 @@
+//--InterfaceDemo
+
+//Camera.Cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace InterfaceDemo
+{
+    class Camera : Product, IHasVolume
+    {
+        public double GetVolume()
+        {
+            return 50;
+        }
+    }
+}
+//--------------------------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace InterfaceDemo
+{
+    interface IComputerDevice
+    {
+        string CPUModel { get; set; }
+        int RAM { get; set; }
+    }
+}
+//--------------------------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace InterfaceDemo
+{
+    interface IHasVolume
+    {
+        double GetVolume();
+    }
+}
+//--------------------------------
+//Laptop.Cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace InterfaceDemo
+{
+    class Laptop : Product, IHasVolume, IComputerDevice
+    {
+        public double Height { get; set; }
+        public double Width { get; set; }
+        public double Length { get; set; }
+        public string CPUModel { get; set;}
+        public int RAM { get; set; }
+        public double GetVolume()
+        {
+            return this.Height * this.Width * this.Length;
+        }
+    }
+}
+//--------------------------------
+//PC.Cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace InterfaceDemo
+{
+    class PC : Product, IComputerDevice
+    {
+        public string CPUModel { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int RAM { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    }
+}
+//--------------------------------
+//Product.Cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace InterfaceDemo
+{
+    class Product
+    {
+    }
+}
+//--------------------------------
+//Program.Cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace InterfaceDemo
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            IHasVolume[] objects = new IHasVolume[]
+                {
+                    new Student() { Height = 180 },
+                    new Camera(),
+                    new Laptop() { Height = 15, Length = 50, Width = 35, RAM = 16, CPUModel = "Intel Core i5" },
+                    new Student() { Height = 170 },
+                    new Student() { Height = 160 },
+                    new Laptop() { Height = 20, Length = 50, Width = 35, RAM = 8, CPUModel = "AMD" },
+                };
+
+            var sum = 0.0;
+            for (int i = 0; i < objects.Length; i++)
+            {
+                if (objects[i] is Laptop)
+                {
+                    var laptop = objects[i] as Laptop;
+                    Console.WriteLine($"{objects[i].GetVolume()} RAM:{laptop.RAM}, CPU:{laptop.CPUModel}");
+                }
+                else
+                    Console.WriteLine(objects[i].GetVolume());
+
+                sum += objects[i].GetVolume();
+            }
+
+            Console.WriteLine(sum);
+            Console.ReadKey();
+        }
+    }
+}
+//--------------------------------
+//Student.Cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace InterfaceDemo
+{
+    class Student : IHasVolume
+    {
+        public double Height { get; set; }
+        public double GetVolume()
+        {
+            return Math.Pow(50, 2) * Math.PI * this.Height;
+        }
+    }
+}
+//--------------------------------
+//Tablet.Cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace InterfaceDemo
+{
+    class Tablet : Product, IComputerDevice
+    {
+        public string CPUModel { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int RAM { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    }
+}
